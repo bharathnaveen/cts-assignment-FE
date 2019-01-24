@@ -1,21 +1,17 @@
+<h4>Upload only .csv format file</h4>
 <input type="file" (change)="handleFileSelect($event)" />
 
-<div>
+<div *ngIf="headers != 0">
   <input type="text" [(ngModel)]="issueCount" placeholder="Serach By Issue Count" />
   <table border="1" width="100%">
     <tr>
-      <th>#</th>
-      <th>First Name</th>
-      <th>Sur Name</th>
-      <th>Issue Count</th>
-      <!-- <th>Date of Birth</th> -->
+      <th *ngFor="let header of headers">{{header.headerName}}</th>
     </tr>
-    <tr *ngFor="let json of JSONData | searchByIssueCount:issueCount;let index = index">
-      <th scope="row">{{index+1}}</th>
-      <td>{{json["First name"]}}</td>
-      <td>{{json["Sur name"]}}</td>
-      <td>{{json["Issue count"]}}</td>
-      <!-- <td>{{json["Date of birth"] | date: 'dd-MM-yyyy'}</td> -->
+    <tr *ngFor="let user of users | searchByIssueCount:issueCount;let index = index">
+      <td *ngFor="let key of user| keys">
+        <span *ngIf="key!='Date_of_birth'">{{user[key]}}</span>
+        <span *ngIf="key=='Date_of_birth'">{{user[key] | date: 'dd-MM-yyyy'}}</span>
+      </td>
     </tr>
   </table>
 </div>

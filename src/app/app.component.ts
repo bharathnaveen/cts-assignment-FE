@@ -6,27 +6,35 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-csvUpload';
   text: any;
-  JSONData: any;
   issueCount = '';
-  extractData(csvText) {
-    var lines = csvText.split("\n");
-    var result = [];
-    var headers = lines[0].split(",");
-    for (var i = 1; i < lines.length - 1; i++) {
-      var obj = {};
-      var currentline = lines[i].split(",");
-      for (var j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
+  headers = [];
+  users = [];
+
+  extractData(csvText: any) {
+    let rows = csvText.split("\n");
+    for (let i = 0; i < rows.length; i++) {
+      if (i === 0) {
+        let headerNames = rows[i].split(",");
+        for (let headerName of headerNames) {
+          this.headers.push({ headerName: JSON.parse(headerName), headerProperty: headerName.replace(/ /g, "_") });
+        }
+      } else {
+        let row = rows[i].split(",");
+        let user = {};
+        for (let j = 0; j < this.headers.length; j++) {
+          for (let k = 0; k < row.length; k++) {
+            if (j == k) {
+              user[JSON.parse(this.headers[j].headerProperty)] = JSON.parse(row[k]);
+            }
+          }
+        }
+        this.users.push(user);
       }
-      result.push(obj);
     }
-    //return result; //JavaScript object
-    this.JSONData = JSON.parse(JSON.stringify(result));
   }
 
-  handleFileSelect(evt) {
+  handleFileSelect(evt: any) {
     let files = evt.target.files; // FileList object
     let file = files[0];
     let reader = new FileReader();

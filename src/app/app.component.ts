@@ -10,14 +10,18 @@ export class AppComponent {
   issueCount = '';
   headers = [];
   users = [];
-
+  /*
+  - Once the extracted string will receives to this method it will splits the string in JSON format,
+  - and finally it will push the JSON into users array.
+  - @params csvText
+  */
   extractData(csvText: any) {
     let rows = csvText.split("\n");
     for (let i = 0; i < rows.length; i++) {
       if (i === 0) {
         let headerNames = rows[i].split(",");
         for (let headerName of headerNames) {
-          this.headers.push({ headerName: JSON.parse(headerName), headerProperty: headerName.replace(/ /g, "_") });
+          this.headers.push({ headerName: JSON.parse(headerName), headerProperty: headerName.replace(/ /g, "_")});
         }
       } else {
         let row = rows[i].split(",");
@@ -33,7 +37,11 @@ export class AppComponent {
       }
     }
   }
-
+  /*
+  - This method is used handle imported file record and extract into string format,
+  -  and into extractData method.
+  - @params evt
+  */
   handleFileSelect(evt: any) {
     let files = evt.target.files; // FileList object
     let file = files[0];

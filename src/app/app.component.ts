@@ -39,7 +39,7 @@ export class AppComponent {
   }
   /*
   - This method is used handle imported file record and extract into string format,
-  - and into extractData method.
+  - and passes the value in extractData method.
   - @params evt
   */
   handleFileSelect(evt: any) {

@@ -43,7 +43,7 @@ export class AppComponent {
   - @params evt
   */
   handleFileSelect(evt: any) {
-    let files = evt.target.files; // FileList object
+    let files = evt.target.files; 
     let file = files[0];
     let reader = new FileReader();
     reader.readAsText(file);

@@ -14,6 +14,6 @@ Once the source code cloned redirect into root path and type
 Usage
 ==================
 Once all dependency files installed and type
-```ng serve``` 
+```npm start``` 
 Visit ```localhost:4200``` to view the app.
 

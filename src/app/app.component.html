@@ -7,8 +7,8 @@
     <tr>
       <th *ngFor="let header of headers">{{header.headerName}}</th>
     </tr>
-    <tr *ngFor="let user of users | searchByIssueCount:issueCount;let index = index">
-      <td *ngFor="let key of user| keys">
+    <tr *ngFor="let user of users | searchByIssueCount:issueCount">
+      <td *ngFor="let key of user | keys">
         <span *ngIf="key!='Date_of_birth'">{{user[key]}}</span>
         <span *ngIf="key=='Date_of_birth'">{{user[key] | date: 'dd-MM-yyyy'}}</span>
       </td>
